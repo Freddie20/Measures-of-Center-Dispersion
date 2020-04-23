@@ -1,0 +1,159 @@
+---
+title: "Mean, Median, Mode, Variance, SD Assignment"
+author: "Freda"
+date: "18/03/2020"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+```{r}
+
+library(readxl)
+library(dplyr)
+
+```
+
+
+```{r}
+
+#Assignment 
+
+Assignment_data <- read_excel("C:\\Users\\CcHUB_1\\Downloads\\R Training\\Basic Research and Analysis Training March Session 1 followup.xlsx")
+
+```
+
+
+```{r}
+
+#Mean, Median, Mode, Variance and SD for Teachers Using App Month 1
+
+```
+
+```{r}
+Mean_Month_1 <- mean(Assignment_data$`Teachers Using App Month 1`, na.rm = TRUE)
+Mean_Month_1
+
+Median_Month_1 <- median(Assignment_data$`Teachers Using App Month 1`, na.rm = TRUE)
+Median_Month_1
+
+getmode <- function(v) {
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+Mode_Month_1 <- getmode(Assignment_data$`Teachers Using App Month 1`)
+Mode_Month_1
+
+Variance_Month_1 <- var(Assignment_data$`Teachers Using App Month 1`, na.rm = TRUE)
+Variance_Month_1
+
+SD_Month_1 <- sd(Assignment_data$`Teachers Using App Month 1`, na.rm = TRUE)
+SD_Month_1
+```
+
+
+
+```{r}
+#Mean, Median, Mode, Variance and SD for Teachers Using App Month 2
+```
+
+```{r}
+Mean_Month_2 <- mean(Assignment_data$`Teachers Using App Month 2`, na.rm = TRUE)
+Mean_Month_2
+
+Median_Month_2 <- median(Assignment_data$`Teachers Using App Month 2`, na.rm = TRUE)
+Median_Month_2 
+
+Mode_Month_2 <- getmode(Assignment_data$`Teachers Using App Month 2`)
+Mode_Month_2
+
+Variance_Month_2 <- var(Assignment_data$`Teachers Using App Month 2`, na.rm = TRUE)
+Variance_Month_2
+
+SD_Month_2 <- sd(Assignment_data$`Teachers Using App Month 2`, na.rm = TRUE)
+SD_Month_2 
+```
+
+
+
+
+```{r}
+
+#Mean, Median, Mode, Variance and SD for Teachers Using App Month 3
+```
+
+```{r}
+Mean_Month_3 <- mean(Assignment_data$`Teachers Using App Month 3`, na.rm = TRUE)
+Mean_Month_3
+
+Median_Month_3 <- median(Assignment_data$`Teachers Using App Month 3`, na.rm = TRUE)
+Median_Month_3 
+
+Mode_Month_3 <- getmode(Assignment_data$`Teachers Using App Month 3`)
+Mode_Month_3
+
+Variance_Month_3 <- var(Assignment_data$`Teachers Using App Month 3`, na.rm = TRUE)
+Variance_Month_3
+
+SD_Month_3 <- sd(Assignment_data$`Teachers Using App Month 3`, na.rm = TRUE)
+SD_Month_3
+```
+
+
+
+
+```{r}
+
+#Mean, Median, Mode, Variance and SD for Age
+```
+
+```{r}
+Mean_Age <- mean(Assignment_data$Age, na.rm = TRUE)
+Mean_Age
+
+Median_Age <- median(Assignment_data$Age, na.rm = TRUE)
+Median_Age
+
+Mode_Age <- getmode(Assignment_data$Age)
+Mode_Age
+
+Variance_Age <- var(Assignment_data$Age, na.rm = TRUE)
+Variance_Age 
+
+SD_Age <- sd(Assignment_data$Age, na.rm = TRUE)
+SD_Age
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
