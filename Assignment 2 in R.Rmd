@@ -1,0 +1,226 @@
+---
+title: "Assignment 2 in R"
+author: "Freda"
+date: "4/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r}
+library(readxl)
+library (ggplot2)
+
+```
+
+
+```{r}
+
+#Assignment Data
+
+Assignment_data <- read_excel("C:\\Users\\CcHUB_1\\Downloads\\R Training\\Basic Research and Analysis Training March Session 1 followup.xlsx")
+
+
+```
+
+
+```{r}
+
+# Visualisation and Interpretation of Month 1
+
+Hist <- ggplot(data=Assignment_data, aes( Assignment_data$`Teachers Using App Month 1`)) + geom_histogram(binwidth = 25, alpha = 0.7, aes(fill=..count..)) + scale_fill_gradient("Count", low = "green", high = "red") + ggtitle("Teachers Using App Month 1") + labs ( y = "Count", x = "Teachers") + theme_minimal() + annotate("text", x = c(200, 400.12, 230), y = c(10.5, 6.5, 4.4), label= c("Mode", "Mean", "Median"), size = 3.5)
+
+
+Hist
+```
+
+```{r}
+#From Month 1 output, we can infer that:
+
+#The mean (average value of the dataset) of the dataset is 400.12 and the value is greatly affected by the outlier (5000) in the dataset and doesn’t really locate the center of the data accurately.
+
+#The median (value found in the middle of the ordered data set) is 230. Since median is not greatly affected by outliers, it is a better measure of the center of the dataset.
+
+#The mode (most frequently occurring) is 200 which means that at the different schools, the highest occurring number of teachers using the app x in month 1 is 200.
+
+#The Variance and SD are the largest in month 1 with 561861.86 and 749.57 respectively, which means that its values are farthest from the mean
+
+```
+
+
+
+
+
+
+```{r}
+
+# Visualisation and Interpretation of Month 2
+
+Hist <- ggplot(data=Assignment_data, aes( Assignment_data$`Teachers Using App Month 2`)) + geom_histogram(binwidth = 25, alpha = 0.7, aes(fill=..count..)) + scale_fill_gradient("Count", low = "green", high = "red") + ggtitle("Teachers Using App Month 2") + labs ( y = "Count", x = "Teachers") + theme_minimal() + annotate("text", x = c(200, 270, 200), y = c(11.4, 5.5, 6.2), label= c("Mode", "Mean", "Median"), size = 3.5)
+
+
+Hist
+
+```
+
+```{r}
+#From Month 2 output, we can infer that:
+
+#the mean of the dataset is 263.54 and the value is affected by the outlier (2000) in the dataset and doesn’t really locate the center of the data accurately.
+
+#The median is 200. Since median is not greatly affected by outliers, it is a better measure of the center of the dataset.
+
+#The mode is 200 which means that at the different schools, the highest occurring number of teachers using the app x in month 2 is 200.
+
+```
+
+
+
+
+
+
+
+
+```{r}
+      
+# Visualisation and Interpretation of Month 3
+
+Hist <- ggplot(data=Assignment_data, aes( Assignment_data$`Teachers Using App Month 3`)) + geom_histogram(binwidth = 25, alpha = 0.7, aes(fill=..count..)) + scale_fill_gradient("Count", low = "green", high = "red") + ggtitle("Teachers Using App Month 3") + labs ( y = "Count", x = "Teachers") + theme_minimal() + annotate("text", x = c(226, 159.39, 200), y = c(8.35, 4.5, 7.5), label= c("Mode", "Mean", "Median"), size = 3.5)
+
+
+Hist
+
+```
+
+```{r}
+#From Month 3 output, we can infer that:
+
+#the mean of the dataset is 159.39 and the value is the most closest to the center of the dataset as it is not affected by outliers when compared to month 1 and 2.
+
+#The median is 200 which is a closer to the mean of the dataset.
+
+#The mode is 215 which means that at the different schools, the highest occurring number of teachers using the app x in month 3 is 215.
+
+```
+
+
+
+
+
+
+```{r}
+      
+# Visualisation and Interpretation of Teachers' Age
+
+Hist <- ggplot(data=Assignment_data, aes( Assignment_data$`Age`)) + geom_histogram(binwidth = 1, alpha = 0.7, aes(fill=..count..)) + scale_fill_gradient("Count", low = "green", high = "red") + ggtitle("Average Age of Teachers") + labs ( y = "Count", x = "Teachers' Age") + theme_minimal() + annotate("text", x = c(25, 34.5, 31), y = c(4.2, 3.2, 3.5), label= c("Mode", "Mean", "Median"), size = 3.5)
+
+Hist
+```
+
+```{r}
+#From Age output, we can infer that:
+
+#The mean of the average age of teachers is 34.5.
+
+#The median is 31 which is a closer to the mean of the dataset.
+
+#The mode is 25 which means that at the different schools, the highest occurring age of teachers using the app x is 25.
+
+#The age dataset has the smallest value of variance and SD of 149.87 and 12.24 respectively, which means its values are closest to the mean.
+
+```
+
+ 
+```{r}
+                            #DataSet Summary of Month 1, 2 and 3
+```
+
+
+```{r}
+
+#Measures of Central Tendency
+
+All_Month <- c("Month 1", "Month 2", "Month 3")
+All_Mean <- c(400.12, 263.54, 159.39)
+All_Median <- c(230, 200, 200)
+All_Mode <- c(200, 200, 215)
+
+All_Data <- data.frame(All_Month, All_Mean, All_Median, All_Mode)
+
+
+ggplot(data=All_Data, aes(x=All_Month, group=0)) + geom_point(aes( y= All_Data$All_Mean ,x = All_Data$All_Month,color = "red")) + geom_line(aes( y= All_Data$All_Mean ,x = All_Data$All_Month,color = "red")) + geom_point(aes( y= All_Data$All_Median ,x = All_Data$All_Month,color = "blue")) + geom_line(aes( y= All_Data$All_Median ,x = All_Data$All_Month,color = "blue")) + geom_point(aes( y= All_Data$All_Mode ,x = All_Data$All_Month,color = "green")) + geom_line(aes( y= All_Data$All_Mode ,x = All_Data$All_Month,color = "green")) + xlab('X') + ylab('Y') + theme_minimal() + ggtitle("Mean, Median and Mode for Months 1, 2 & 3") + theme(plot.title = element_text(hjust = 0.5)) + scale_color_manual(labels = c("Median", "Mode", "Mean"), values = c("blue", "red", "green")) + labs (colour = "Measures of Central Tendency")
+
+
+```
+
+
+
+```{r}
+
+#Measures of Dispersion
+
+All_Month <- c("Month 1", "Month 2", "Month 3")
+All_SD <- c(749.57, 300.96, 101.42)
+
+All_Data2 <- data.frame(All_Month, All_SD)
+
+ggplot(data=All_Data2, aes(x=All_Month, group=0)) + geom_point(aes( y= All_Data2$All_SD ,x = All_Data2$All_Month,color = "orange")) + geom_line(aes( y= All_Data2$All_SD ,x = All_Data2$All_Month,color = "orange")) + xlab('X') + ylab('Y') + theme_minimal() + ggtitle("SD for Months 1,2 & 3") + theme(plot.title = element_text(hjust = 0.5)) + scale_color_manual(labels = c("SD"), values = c("orange")) + labs (colour = "Measures of Dispersion")
+```
+
+
+```{r}
+#From graph summary, we can infer that:
+
+
+#Using the mean values, the use of app x dropped from month 1 to month 3
+
+#Using the median and mode values, the use of app x from month 1 to month 3 does not record much change in the values compared to the mean. 
+
+#A large SD indicates that the data values are far from the mean and a small SD indicates that they are clustered closely around the mean.
+
+#The data set variable (Teachers using app month 1) has the largest SD of 749.57 which means that its values are farthest from the mean, while the data set variable (Age) has the smallest SD of 12.24  which means its values are closest to the mean.
+
+    
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
