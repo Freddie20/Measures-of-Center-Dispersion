@@ -1,0 +1,147 @@
+---
+title: "Assign in R"
+author: "Freda"
+date: "4/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+
+```
+
+
+```{r pressure, echo=FALSE}
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r}
+library(ggpubr)
+
+#Context of dataset: Data was collected from 41 samples (schools) from different areas in Nigeria. The total number of teachers using app X over 3 months was collected. The data below shows the use of the app in Nigeria in the 3-month period.
+
+```
+
+```{r}
+
+#Step 1
+
+#Outliers were removed from the dataset. A frequency table was created for the 3 months, and organised to a dataframe for easy line graph plotting.
+
+
+Month1_values <- c(0, 100, 150, 200, 215, 230, 300, 350, 400, 430, 500)
+
+Month1_count <- c(1, 5, 1, 10, 3, 1, 4, 2, 1, 6, 7)
+
+Month1_df <- data.frame(Month1_values, Month1_count)
+
+
+Month2_values <- c(50, 100, 115, 150, 200, 215, 250, 300, 400, 500, 600)
+
+Month2_count <- c( 2, 5,  1,  4, 12, 6, 2,  5,  1,  2,  1)
+
+Month2_df <- data.frame(Month2_values, Month2_count)
+
+
+Month3_values <- c(0, 50, 100, 115, 150, 200, 215, 250, 300, 400)
+
+Month3_count <- c(7, 2, 5, 1, 4, 7, 8, 2, 4, 1)
+
+Month3_df <- data.frame(Month3_values, Month3_count)
+
+
+```
+
+
+
+```{r}
+
+#Step 2
+
+#To create a table to show the mean, median and mode values of the 3 months, the stats of the months organised to a dataframe and the stats table was created using ggtexttable.
+
+Month <- c("Month 1", "Month 2", "Month 3")
+All_mean <- c(400.12, 263.54, 159.39)
+All_median <- c(230, 200, 200)
+All_mode <- c(200, 200, 215)
+
+All_Data <- data.frame(Month, All_mean, All_median, All_mode)
+
+
+stable <- desc_statby(All_Data, measure.var = "All_mean", grps = c("Month", "All_median", "All_mode"))
+
+stable <- stable[, c("Month","mean", "All_median", "All_mode")]
+
+stable.p <- ggtexttable(stable, rows = NULL, theme = ttheme("mGreen")) 
+
+
+```
+
+
+
+```{r}
+
+#Step 3 
+
+#A line graph for each month
+
+Month1 <- ggplot(Month1_df, aes(x=Month1_values, y=Month1_count)) + geom_line(color = "darkolivegreen4") + geom_point( color = "darkolivegreen4") +theme_minimal() + xlab('Month 1') + ylab('Count') + expand_limits(x=0, y=0) + expand_limits(x=c(100,600), y=c(5, 13))
+
+Month1 
+
+Month2 <- ggplot(Month2_df, aes(x=Month2_values, y=Month2_count)) + geom_line(color = "green3") + geom_point( color = "green3") +theme_minimal() + xlab('Month 2') + ylab('Count') + expand_limits(x=0, y=0) + expand_limits(x=c(100,600), y=c(5, 13))
+
+Month2
+
+
+Month3 <- ggplot(Month3_df, aes(x=Month3_values, y=Month3_count)) + geom_line(color = "darkolivegreen") + geom_point( color = "darkolivegreen") +theme_minimal() + xlab('Month 3') + ylab('Count') + expand_limits(x=0, y=0) + expand_limits(x=c(100,600), y=c(5, 13))
+
+Month3
+
+```
+
+
+
+```{r}
+
+#Combined the line graps on one page
+
+SummaryPlot <- ggarrange(Month1, Month2, Month3, ncol = 2, nrow = 2, stable.p)
+
+
+annotate_figure(SummaryPlot,top = text_grob("Teachers' Use of App X for Month 1, 2 & 3", color = "darkslategray", face = "bold", size = 12), bottom = text_grob("Note: The graph shows Teachers Using App X in different schools in Nigeria over a span of 3 months", color = "darkslategray", hjust = 1.1, x = 1, face = "italic", size = 10))
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
